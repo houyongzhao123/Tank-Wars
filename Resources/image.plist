@@ -26,9 +26,9 @@
                 <key>rotated</key>
                 <true/>
                 <key>sourceColorRect</key>
-                <string>{{1,0},{6,8}}</string>
+                <string>{{0,0},{6,8}}</string>
                 <key>sourceSize</key>
-                <string>{8,8}</string>
+                <string>{6,8}</string>
             </dict>
             <key>en1.png</key>
             <dict>
@@ -39,9 +39,9 @@
                 <key>rotated</key>
                 <false/>
                 <key>sourceColorRect</key>
-                <string>{{2,3},{28,26}}</string>
+                <string>{{0,0},{28,26}}</string>
                 <key>sourceSize</key>
-                <string>{32,32}</string>
+                <string>{28,26}</string>
             </dict>
             <key>en1r.png</key>
             <dict>
@@ -52,22 +52,22 @@
                 <key>rotated</key>
                 <false/>
                 <key>sourceColorRect</key>
-                <string>{{2,3},{28,26}}</string>
+                <string>{{0,0},{28,26}}</string>
                 <key>sourceSize</key>
-                <string>{32,32}</string>
+                <string>{28,26}</string>
             </dict>
             <key>en2.png</key>
             <dict>
                 <key>frame</key>
                 <string>{{48,124},{24,28}}</string>
                 <key>offset</key>
-                <string>{0,1}</string>
+                <string>{0,0}</string>
                 <key>rotated</key>
                 <true/>
                 <key>sourceColorRect</key>
-                <string>{{4,1},{24,28}}</string>
+                <string>{{0,0},{24,28}}</string>
                 <key>sourceSize</key>
-                <string>{32,32}</string>
+                <string>{24,28}</string>
             </dict>
             <key>en2r.png</key>
             <dict>
@@ -78,9 +78,9 @@
                 <key>rotated</key>
                 <true/>
                 <key>sourceColorRect</key>
-                <string>{{4,2},{24,28}}</string>
+                <string>{{0,0},{24,28}}</string>
                 <key>sourceSize</key>
-                <string>{32,32}</string>
+                <string>{24,28}</string>
             </dict>
             <key>en3.png</key>
             <dict>
@@ -91,9 +91,9 @@
                 <key>rotated</key>
                 <true/>
                 <key>sourceColorRect</key>
-                <string>{{3,2},{26,28}}</string>
+                <string>{{0,0},{26,28}}</string>
                 <key>sourceSize</key>
-                <string>{32,32}</string>
+                <string>{26,28}</string>
             </dict>
             <key>en5.png</key>
             <dict>
@@ -104,9 +104,9 @@
                 <key>rotated</key>
                 <true/>
                 <key>sourceColorRect</key>
-                <string>{{3,2},{26,28}}</string>
+                <string>{{0,0},{26,28}}</string>
                 <key>sourceSize</key>
-                <string>{32,32}</string>
+                <string>{26,28}</string>
             </dict>
             <key>en6.png</key>
             <dict>
@@ -117,9 +117,9 @@
                 <key>rotated</key>
                 <true/>
                 <key>sourceColorRect</key>
-                <string>{{3,2},{26,28}}</string>
+                <string>{{0,0},{26,28}}</string>
                 <key>sourceSize</key>
-                <string>{32,32}</string>
+                <string>{26,28}</string>
             </dict>
             <key>en7.png</key>
             <dict>
@@ -130,9 +130,9 @@
                 <key>rotated</key>
                 <true/>
                 <key>sourceColorRect</key>
-                <string>{{3,2},{26,28}}</string>
+                <string>{{0,0},{26,28}}</string>
                 <key>sourceSize</key>
-                <string>{32,32}</string>
+                <string>{26,28}</string>
             </dict>
             <key>enemy.png</key>
             <dict>
@@ -273,9 +273,9 @@
                 <key>rotated</key>
                 <false/>
                 <key>sourceColorRect</key>
-                <string>{{2,2},{28,28}}</string>
+                <string>{{0,0},{28,28}}</string>
                 <key>sourceSize</key>
-                <string>{32,32}</string>
+                <string>{28,28}</string>
             </dict>
             <key>p1-a.png</key>
             <dict>
@@ -286,9 +286,9 @@
                 <key>rotated</key>
                 <false/>
                 <key>sourceColorRect</key>
-                <string>{{2,2},{28,28}}</string>
+                <string>{{0,0},{28,28}}</string>
                 <key>sourceSize</key>
-                <string>{32,32}</string>
+                <string>{28,28}</string>
             </dict>
             <key>p1-b.png</key>
             <dict>
@@ -299,9 +299,9 @@
                 <key>rotated</key>
                 <false/>
                 <key>sourceColorRect</key>
-                <string>{{2,2},{28,28}}</string>
+                <string>{{0,0},{28,28}}</string>
                 <key>sourceSize</key>
-                <string>{32,32}</string>
+                <string>{28,28}</string>
             </dict>
             <key>p1-c.png</key>
             <dict>
@@ -312,9 +312,9 @@
                 <key>rotated</key>
                 <false/>
                 <key>sourceColorRect</key>
-                <string>{{2,2},{28,28}}</string>
+                <string>{{0,0},{28,28}}</string>
                 <key>sourceSize</key>
-                <string>{32,32}</string>
+                <string>{28,28}</string>
             </dict>
             <key>p1.png</key>
             <dict>
@@ -325,9 +325,9 @@
                 <key>rotated</key>
                 <false/>
                 <key>sourceColorRect</key>
-                <string>{{2,2},{28,28}}</string>
+                <string>{{0,0},{28,28}}</string>
                 <key>sourceSize</key>
-                <string>{32,32}</string>
+                <string>{28,28}</string>
             </dict>
             <key>p2-a-cell.png</key>
             <dict>
@@ -338,9 +338,9 @@
                 <key>rotated</key>
                 <false/>
                 <key>sourceColorRect</key>
-                <string>{{2,2},{28,28}}</string>
+                <string>{{0,0},{28,28}}</string>
                 <key>sourceSize</key>
-                <string>{32,32}</string>
+                <string>{28,28}</string>
             </dict>
             <key>p2-a.png</key>
             <dict>
@@ -351,9 +351,9 @@
                 <key>rotated</key>
                 <false/>
                 <key>sourceColorRect</key>
-                <string>{{2,2},{28,28}}</string>
+                <string>{{0,0},{28,28}}</string>
                 <key>sourceSize</key>
-                <string>{32,32}</string>
+                <string>{28,28}</string>
             </dict>
             <key>p2-b.png</key>
             <dict>
@@ -364,9 +364,9 @@
                 <key>rotated</key>
                 <false/>
                 <key>sourceColorRect</key>
-                <string>{{2,2},{28,28}}</string>
+                <string>{{0,0},{28,28}}</string>
                 <key>sourceSize</key>
-                <string>{32,32}</string>
+                <string>{28,28}</string>
             </dict>
             <key>p2-c.png</key>
             <dict>
@@ -377,9 +377,9 @@
                 <key>rotated</key>
                 <false/>
                 <key>sourceColorRect</key>
-                <string>{{2,2},{28,28}}</string>
+                <string>{{0,0},{28,28}}</string>
                 <key>sourceSize</key>
-                <string>{32,32}</string>
+                <string>{28,28}</string>
             </dict>
             <key>p2.png</key>
             <dict>
@@ -390,9 +390,9 @@
                 <key>rotated</key>
                 <false/>
                 <key>sourceColorRect</key>
-                <string>{{2,2},{28,28}}</string>
+                <string>{{0,0},{28,28}}</string>
                 <key>sourceSize</key>
-                <string>{32,32}</string>
+                <string>{28,28}</string>
             </dict>
             <key>props-mine.png</key>
             <dict>
@@ -403,9 +403,9 @@
                 <key>rotated</key>
                 <false/>
                 <key>sourceColorRect</key>
-                <string>{{1,2},{30,28}}</string>
+                <string>{{0,0},{30,28}}</string>
                 <key>sourceSize</key>
-                <string>{32,32}</string>
+                <string>{30,28}</string>
             </dict>
             <key>props-protect.png</key>
             <dict>
@@ -416,9 +416,9 @@
                 <key>rotated</key>
                 <false/>
                 <key>sourceColorRect</key>
-                <string>{{1,2},{30,28}}</string>
+                <string>{{0,0},{30,28}}</string>
                 <key>sourceSize</key>
-                <string>{32,32}</string>
+                <string>{30,28}</string>
             </dict>
             <key>props-spade.png</key>
             <dict>
@@ -429,9 +429,9 @@
                 <key>rotated</key>
                 <false/>
                 <key>sourceColorRect</key>
-                <string>{{1,2},{30,28}}</string>
+                <string>{{0,0},{30,28}}</string>
                 <key>sourceSize</key>
-                <string>{32,32}</string>
+                <string>{30,28}</string>
             </dict>
             <key>props-start.png</key>
             <dict>
@@ -442,9 +442,9 @@
                 <key>rotated</key>
                 <false/>
                 <key>sourceColorRect</key>
-                <string>{{1,2},{30,28}}</string>
+                <string>{{0,0},{30,28}}</string>
                 <key>sourceSize</key>
-                <string>{32,32}</string>
+                <string>{30,28}</string>
             </dict>
             <key>props-tank.png</key>
             <dict>
@@ -455,9 +455,9 @@
                 <key>rotated</key>
                 <false/>
                 <key>sourceColorRect</key>
-                <string>{{1,2},{30,28}}</string>
+                <string>{{0,0},{30,28}}</string>
                 <key>sourceSize</key>
-                <string>{32,32}</string>
+                <string>{30,28}</string>
             </dict>
             <key>props-timer.png</key>
             <dict>
@@ -468,9 +468,9 @@
                 <key>rotated</key>
                 <false/>
                 <key>sourceColorRect</key>
-                <string>{{1,2},{30,28}}</string>
+                <string>{{0,0},{30,28}}</string>
                 <key>sourceSize</key>
-                <string>{32,32}</string>
+                <string>{30,28}</string>
             </dict>
             <key>shield1.png</key>
             <dict>
@@ -503,26 +503,26 @@
                 <key>frame</key>
                 <string>{{234,62},{18,18}}</string>
                 <key>offset</key>
-                <string>{-1,0}</string>
+                <string>{0,0}</string>
                 <key>rotated</key>
                 <false/>
                 <key>sourceColorRect</key>
-                <string>{{6,7},{18,18}}</string>
+                <string>{{0,0},{18,18}}</string>
                 <key>sourceSize</key>
-                <string>{32,32}</string>
+                <string>{18,18}</string>
             </dict>
             <key>xing2.png</key>
             <dict>
                 <key>frame</key>
                 <string>{{170,118},{26,26}}</string>
                 <key>offset</key>
-                <string>{-1,0}</string>
+                <string>{0,0}</string>
                 <key>rotated</key>
                 <false/>
                 <key>sourceColorRect</key>
-                <string>{{2,3},{26,26}}</string>
+                <string>{{0,0},{26,26}}</string>
                 <key>sourceSize</key>
-                <string>{32,32}</string>
+                <string>{26,26}</string>
             </dict>
             <key>xing3.png</key>
             <dict>
@@ -533,9 +533,9 @@
                 <key>rotated</key>
                 <false/>
                 <key>sourceColorRect</key>
-                <string>{{3,3},{26,26}}</string>
+                <string>{{0,0},{26,26}}</string>
                 <key>sourceSize</key>
-                <string>{32,32}</string>
+                <string>{26,26}</string>
             </dict>
             <key>xing4.png</key>
             <dict>
@@ -556,13 +556,13 @@
             <key>format</key>
             <integer>2</integer>
             <key>realTextureFileName</key>
-            <string>images.pvr.ccz</string>
+            <string>image.png</string>
             <key>size</key>
             <string>{256,256}</string>
             <key>smartupdate</key>
-            <string>$TexturePacker:SmartUpdate:727fb80d28923e33513c4ba36d4d8e76$</string>
+            <string>$TexturePacker:SmartUpdate:3aa29b4d0ce24cf3d2372cb82d2b654a$</string>
             <key>textureFileName</key>
-            <string>images.pvr.ccz</string>
+            <string>image.png</string>
         </dict>
     </dict>
 </plist>
