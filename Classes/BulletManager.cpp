@@ -27,19 +27,37 @@ void BulletManager::removeTankBullet(Basebullet *bullet)
 }
 void BulletManager::removeAllBullets()
 {
-	//清除所有无效子弹
-
+	for (auto biter = tankbullet.begin();biter!=tankbullet.end();)
+	{
+		if ((*biter)->getISDIE())
+		{
+			biter = tankbullet.erase(biter);
+		}
+		else
+		{
+			biter++;
+		}
+	}
+	for (auto eiter = enemybullet.begin();eiter!=enemybullet.end();)
+	{
+		if ((*eiter)->getISDIE())
+		{
+			eiter = enemybullet.erase(eiter);
+		}
+		else
+		{
+			eiter++;
+		}
+	}
 }
 void BulletManager::cleanAll()
 {
 	tankbullet.clear();
 	enemybullet.clear();
 }
-Vector<Basebullet *>& BulletManager::getEnemyBulletManger()
-{
+Vector<Basebullet*>& BulletManager::getEnemyBulletManger(){
 	return enemybullet;
 }
-Vector<Basebullet *>& BulletManager::getTankBulletManager()
-{
+Vector<Basebullet*>& BulletManager::getTankBulletManager(){
 	return tankbullet;
 }

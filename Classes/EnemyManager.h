@@ -11,7 +11,7 @@ class EnemyManager
 public:
 	void addEnemy(BaseTank * tank);//添加敌军
 	void removeEnemy(BaseTank * tank);//移除敌军
-	void removeAllenemys();//移除所有子弹
+	void removeAllenemys();//移除所有敌军
 	void cleanAll();
 	Vector<BaseTank*>& getEnemyManger();//获取敌军子弹容器
 	static EnemyManager* getInstance();

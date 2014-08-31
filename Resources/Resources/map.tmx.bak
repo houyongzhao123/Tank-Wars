@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" width="40" height="40" tilewidth="16" tileheight="16">
+ <tileset firstgid="1" name="tile" tilewidth="16" tileheight="16">
+  <image source="../../Tank_Battle/Resources/tile.png" width="224" height="32"/>
+ </tileset>
+ <layer name="bg" width="40" height="40">
+  <data encoding="base64" compression="zlib">
+   eJztmNEOgyAMRYHtbUtke9v+/0PHwxpJQwsN3bwx3ORGqdocW0RjCEseisWp2tbxqMST4Xwpf1KOj1y/Gbm3r/PBfFo8C3wSN8U9+bR69Di8+az9+jdfFjiQ+FDrp+VF5tPWOQQ+7blG47sUX4H5HsVPYD4rh5XvrJLq55k/NsaSuXi/+DgLJqWOaV7X+TVb1btPiZ9zLc1pZH2p+yv1fTYuzaNfve+tce/vF5538S2+I/h4fjQ+rzgyH+0j8yHXr/W9i8SHPv88+axafPL/jZZTh8PKx98Dljh3i280/2yfuCjfrfge9pqiiPhexe+w18BLH84QFqI=
+  </data>
+ </layer>
+</map>

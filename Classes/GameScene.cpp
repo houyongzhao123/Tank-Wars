@@ -1,6 +1,7 @@
 #include "GameScene.h"
+#include "MapLayer.h"
 #include "Tanklayer.h"
-#include "Maplayer.h"
+#include "EnemyLayer.h"
 #include "LogicLayer.h"
 bool GameScene::init(){
 	if(!Scene::init()){
@@ -9,22 +10,28 @@ bool GameScene::init(){
 	//加入帧缓存图片
 	SpriteFrameCache::getInstance()->addSpriteFramesWithFile("image.plist");
 	//加入地图层
-
-	auto map = MapLayer::create();
-	map->setName("map");
+	auto maplayer= MapLayer::create();
+	maplayer->setName("map");
+	this->addChild(maplayer);
 	//加入主坦克层
 	auto tanklyer = Tanklayer::create();
 	tanklyer->setName("tanklyer");
-	auto logiclayer = LogicLayer::create();
-	this->addChild(logiclayer,100);
-	this->addChild(map);
 	this->addChild(tanklyer);
-    
+	//加入敌方坦克
+	auto enemylayer = EnemyLayer::create();
+	enemylayer->setName("enemlayer");
+	this->addChild(enemylayer);
+	//逻辑
+    auto logiclayer = LogicLayer::create();
+	this->addChild(logiclayer);
 	return true;
 }
 Layer* GameScene::getTanklayer(){
-	return this-> getChildByName<Tanklayer*>("tanklyer");	
+	return this-> getChildByName<Layer*>("tanklyer");	
 }
-Layer*GameScene::getMapLayer(){
-	return this->getChildByName<Layer*>("map");
+Layer* GameScene::getMaplayer(){
+	return this-> getChildByName<Layer*>("map");
+}
+Layer* GameScene::getenemlayer(){
+	return this-> getChildByName<Layer*>("enemlayer");	
 }

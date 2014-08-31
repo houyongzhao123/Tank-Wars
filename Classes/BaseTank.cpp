@@ -8,6 +8,7 @@ bool BaseTank::initWithSpriteFrameName(std::string name,int hp,int speed){
 	this->hp=hp;
 	this->speed=speed;
 	this->state=Up;
+	this->isdie=false;
 	return true;
 }
 void BaseTank::move(moverect State){
@@ -24,4 +25,13 @@ void BaseTank::move(moverect State){
 		this->setRotation(90);
 		this->setPositionX(this->getPositionX()+speed);
 	}
+}
+void BaseTank::hurt(int hp){
+	this->hp-=hp;
+	if(this->hp<=0){
+		this->isdie=true;
+		this->removeFromParentAndCleanup(true);
+		log("%d",this->hp);
+	}
+	
 }

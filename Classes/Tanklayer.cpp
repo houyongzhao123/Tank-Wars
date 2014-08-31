@@ -5,15 +5,15 @@ bool Tanklayer::init(){
 	}
 	ispress =false;
 	tank = Tank::create();
-	tank->setPosition(Vec2(480,320));
 	tank->setName("tank");
+	tank->setPosition(Vec2(480,320));
 	this->addChild(tank);
 	//×¢²á²¶×½¼àÌı	
 	auto listenerkeyPad = EventListenerKeyboard::create();
 	listenerkeyPad->onKeyPressed = CC_CALLBACK_2(Tanklayer::onKeyReleased, this);
 	listenerkeyPad->onKeyReleased = [=](EventKeyboard::KeyCode keycode, cocos2d::Event *event){ispress =false;};
 	_eventDispatcher->addEventListenerWithSceneGraphPriority(listenerkeyPad, this);
-	this->scheduleUpdate();
+	this->schedule(schedule_selector(Tanklayer::update),0.05);
 	return true;
 }
 //²¶×½¼àÌı

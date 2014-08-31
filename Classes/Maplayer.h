@@ -13,6 +13,8 @@ public:
 	//检查是否可以有东西 是否可破坏
 	bool checkNodeBreak(Vec2 position);
 	bool checkIsNode(Vec2 position);
+	bool breakNode(Vec2 position);//将该点的精灵移出,因为受到子弹攻击
+
 private:
 	float offX;//误差,因为地图位置改变过,偏移量其实是x向右移动了960*0.2=192;
 	TMXTiledMap* map;//地图的层

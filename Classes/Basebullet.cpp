@@ -1,5 +1,6 @@
 #include "Basebullet.h"
 #include "GameScene.h"
+#include "BulletManager.h"
 Basebullet* Basebullet::Createbullet(Vec2 position,moverect STATE){
 	Basebullet *bullet =new Basebullet();
 	if(bullet && bullet->initWithTank(position,STATE))
@@ -14,6 +15,7 @@ bool Basebullet::initWithTank(Vec2 position,moverect STATE){
 	if(!Sprite::initWithSpriteFrameName("bullet.png")){
 		return false;
 	}
+	this->Attack=BULLETATTACK;
 	this->STATE = STATE;
 	this->position=position;
 	this->setPosition(position);
@@ -23,16 +25,31 @@ bool Basebullet::initWithTank(Vec2 position,moverect STATE){
 	//通过游戏场景得到游戏层并把子弹贴在游戏层
 	scene->getTanklayer()->addChild(this);
 	this->move();
+	this->isdie=false;
 	return true;
 }
+//移动方法的实现
 void Basebullet::move(){
 	if(STATE==0){
-		this->runAction(MoveBy::create(((vsize.height-this->getPositionY())/YIDONGSUDU),Vec2(0,(vsize.height-this->getPositionY()))));
+		auto to = MoveTo::create(((vsize.height-this->getPositionY())/YIDONGSUDU),Vec2(this->getPositionX(),(vsize.height)));
+		auto cf = CallFunc::create(std::bind(&Basebullet::remove,this));
+		this->runAction(Sequence::create(to,cf,NULL));
 	}else if(STATE==1){
-		this->runAction(MoveBy::create((this->getPositionY()/YIDONGSUDU),Vec2(0,0-this->getPositionY())));
+		auto to = MoveTo::create((this->getPositionY()/YIDONGSUDU),Vec2(this->getPositionX(),0));
+		auto cf = CallFunc::create(std::bind(&Basebullet::remove,this));
+		this->runAction(Sequence::create(to,cf,NULL));
 	}else if(STATE==2){
-		this->runAction(MoveBy::create((this->getPositionX()/YIDONGSUDU),Vec2(0-this->getPositionX(),0)));
+		auto to = MoveTo::create((this->getPositionX()/YIDONGSUDU),Vec2(0,this->getPositionY()));
+		auto cf = CallFunc::create(std::bind(&Basebullet::remove,this));
+		this->runAction(Sequence::create(to,cf,NULL));
 	}else if(STATE==3){
-		this->runAction(MoveBy::create((vsize.width/YIDONGSUDU),Vec2(vsize.width-this->getPositionX(),0)));
+		auto to = MoveTo::create(((vsize.width-this->getPositionX())/YIDONGSUDU),Vec2(vsize.width,this->getPositionY()));
+		auto cf = CallFunc::create(std::bind(&Basebullet::remove,this));
+		this->runAction(Sequence::create(to,cf,NULL));
 	}
+}
+//将移除屏幕的子弹弄死
+void Basebullet::remove(){
+	this->isdie=true;
+	this->removeFromParentAndCleanup(true);
 }

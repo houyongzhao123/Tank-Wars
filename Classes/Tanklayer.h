@@ -7,10 +7,9 @@ class Tanklayer:public Layer{
 public:
 	bool ispress;
 public:
-	void onKeyReleased(EventKeyboard::KeyCode keycode, cocos2d::Event *event);
+	void onKeyReleased(EventKeyboard::KeyCode keycode, cocos2d::Event *event);//°´¼ü¼àÌý
 	virtual bool init();
 	CREATE_FUNC(Tanklayer);
-	static Scene* createScene();
 	void update(float t);
 private:
 	Tank* tank;

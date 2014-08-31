@@ -43,7 +43,8 @@ void LogicLayer::TankTestBound()
 		auto enemy = *iter;
 		if (tank->getBoundingBox().intersectsRect(enemy->getBoundingBox()))
 		{
-			tank->setPosition(tank->getPosition());
+			//tank->setPosition(tank->getPosition());
+
 		}
 	}
 
@@ -66,21 +67,44 @@ void LogicLayer::bulletEvsT()
 			if (enemybullet->getBoundingBox().intersectsRect(tankbullet->getBoundingBox()))
 			{
 				//设置所有子弹消失状态
+
 			}
 		}
 	}
 }
 void LogicLayer::bulletvsBarrer()
 {   
-	/*auto scene = dynamic_cast<GameScene *>(Director::getInstance()->getRunningScene());
+	auto scene = dynamic_cast<GameScene *>(Director::getInstance()->getRunningScene());
 	auto map = dynamic_cast<MapLayer *>(scene->getChildByName("map"));
-	auto sp = this->getChildByTag(1);
+	/*auto sp = this->getChildByTag(1);
 	auto t = map->checkIsNode(sp->getPosition());
 	log("%d",t);*/
 	//子弹和障碍
-	/*for (ene)
+	auto tankbu = BulletManager::getInstance()->getTankBulletManager();
+	auto enemybu = BulletManager::getInstance()->getEnemyBulletManger();
+	for (auto titer = tankbu.begin();titer!=tankbu.end();titer++)
+	{    auto bu = (*titer);
+		if (map->checkIsNode(bu->getPosition()))
+		{
+			if (map->checkNodeBreak(bu->getPosition()))
+			{
+				map->breakNode(bu->getPosition());	
+			}
+			bu->remove();
+		}
+	}
+	for (auto titer = enemybu.begin();titer!=enemybu.end();titer)
+	{    auto bu = (*titer);
+	if (map->checkIsNode(bu->getPosition()))
 	{
-	}*/
+		if (map->checkNodeBreak(bu->getPosition()))
+		{
+			map->breakNode(bu->getPosition());
+			
+		}
+		bu->remove();
+	}
+	}
 }
 
 void LogicLayer::bulletVsEnemy()
@@ -89,12 +113,14 @@ void LogicLayer::bulletVsEnemy()
 	auto enemy = EnemyManager::getInstance()->getEnemyManger();
 	for(auto titer = tankbu.begin();titer!=tankbu.end();titer++)
 	{  auto tankbullet = *titer;
-	   for (auto eiter = enemy.begin();eiter!=enemy.end();titer++)
+	   for (auto eiter = enemy.begin();eiter!=enemy.end();eiter++)
 	   {   
-		   auto enemybullet = *eiter;
-		   if (enemybullet->getBoundingBox().intersectsRect(tankbullet->getBoundingBox()))
+		   auto enemy = *eiter;
+		   if (enemy->getBoundingBox().intersectsRect(tankbullet->getBoundingBox()))
 		   {
 			   //设置消失状态
+			   tankbullet->remove();
+			   enemy->hurt(tankbullet->getATTACK());
 		   }
 	   }
 	}
@@ -103,12 +129,17 @@ void LogicLayer::bulletVsTank()
 {
 	auto enemybu = BulletManager::getInstance()->getEnemyBulletManger();
 	auto scene =dynamic_cast<GameScene *> (Director::getInstance()->getRunningScene());
-	auto tank = scene->getTanklayer()->getChildByName("tank");
+	auto tank =(BaseTank *) scene->getTanklayer()->getChildByName("tank");
+	if (tank==nullptr)
+	{
+		return;
+	}
 	for (auto eiter = enemybu.begin();eiter!=enemybu.end();eiter++)
 	{   auto bullet = *eiter;
 		if (tank->getBoundingBox().intersectsRect(bullet->getBoundingBox()))
 		{
 			//tank掉血 gameover
+			tank->hurt(bullet->getATTACK());
 		}
 	}
 }
@@ -116,4 +147,6 @@ void LogicLayer::update(float t)
 {
 	TankTestBound();
 	BulletTestBound();
+	BulletManager::getInstance()->removeAllBullets();
+	EnemyManager::getInstance()->removeAllenemys();
 }

@@ -7,6 +7,7 @@ public:
 	virtual bool init();
 	CREATE_FUNC(GameScene);
 	Layer* getTanklayer();
-	Layer* getMapLayer();
+	Layer* getMaplayer();
+	Layer* getenemlayer();
 };
 #endif

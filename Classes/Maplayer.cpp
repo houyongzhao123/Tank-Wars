@@ -100,9 +100,14 @@ Vec2 MapLayer::converTotileCoord(Vec2 position){
 
 //检查是否有东西
 bool MapLayer::checkIsNode(Vec2 position){
+
 	Vec2 towerCoord = converTotileCoord(position);//地图坐标
 	//Vec2 matrixCoord = converToMatrixCoord(position);//数组位置
-	if (towerCoord.x>=40||towerCoord.x<= 0)
+	if (towerCoord.x>=40||towerCoord.x<=0)
+	{
+		return false;
+	}
+	if (towerCoord.y>=40||towerCoord.y<=0)
 	{
 		return false;
 	}
@@ -127,5 +132,34 @@ bool MapLayer::checkNodeBreak(Vec2 position){
 	
 	BreakValue = titleTemp.at("canBreak").asBool();
 	return BreakValue;
+
+}
+// 将该点的精灵移出, 因为受到子弹攻击
+bool MapLayer::breakNode(Vec2 position){
+	Vec2 towerCoord = converTotileCoord(position + Vec2(0,0));//地图坐标
+	auto sptoBreak = bgLayer->tileAt(towerCoord);
+	if (sptoBreak){
+		sptoBreak->removeFromParentAndCleanup(true);
+		
+	}
+	Vec2 towerCoord1 = converTotileCoord(position+Vec2(16,0));//地图坐标
+	auto sptoBreak1 = bgLayer->tileAt(towerCoord1);
+	if (sptoBreak1){
+		sptoBreak1->removeFromParentAndCleanup(true);
+
+	}
+	Vec2 towerCoord2 = converTotileCoord(position+Vec2(0,16));//地图坐标
+	auto sptoBreak2 = bgLayer->tileAt(towerCoord2);
+	if (sptoBreak2){
+		sptoBreak2->removeFromParentAndCleanup(true);
+
+	}
+// 	Vec2 towerCoord3 = converTotileCoord(position+Vec2(-8,0));//地图坐标
+// 	auto sptoBreak3 = bgLayer->tileAt(towerCoord3);
+// 	if (sptoBreak3){
+// 		sptoBreak3->removeFromParentAndCleanup(true);
+// 
+// 	}
+	return true;
 
 }

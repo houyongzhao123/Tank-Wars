@@ -21,7 +21,18 @@ void EnemyManager::removeEnemy(BaseTank * tank)
 
 void EnemyManager::removeAllenemys()
 {
+	for (auto eiter = enemyVector.begin();eiter!=enemyVector.end();)
+	{
+		if ((*eiter)->getISdie())
+		{
+			eiter = enemyVector.erase(eiter);
+		}
+		else
+		{
 
+			eiter++;
+		}
+	}
 }
 void EnemyManager::cleanAll()
 {

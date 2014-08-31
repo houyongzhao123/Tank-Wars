@@ -1,5 +1,6 @@
 #include "Tank.h"
 #include "Basebullet.h"
+#include "BulletManager.h"
 Tank* Tank::create(){
 	Tank *mytank =new Tank();
 	if(mytank && mytank->init())
@@ -19,7 +20,8 @@ bool Tank::init(){
 	return true;
 }
 void Tank::fire(){
-	Basebullet::Createbullet(this->getPosition(),this->getState());
+	auto bullet = Basebullet::Createbullet(this->getPosition(),this->getState());
+	BulletManager::getInstance()->addTankBullet(bullet);
 }
 void Tank::runAnimate()
 {
