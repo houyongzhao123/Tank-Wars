@@ -34,15 +34,15 @@ void Basebullet::move(){
 		auto to = MoveTo::create(((vsize.height-this->getPositionY())/YIDONGSUDU),Vec2(this->getPositionX(),(vsize.height)));
 		auto cf = CallFunc::create(std::bind(&Basebullet::remove,this));
 		this->runAction(Sequence::create(to,cf,NULL));
-	}else if(STATE==1){
+	}else if(STATE==2){
 		auto to = MoveTo::create((this->getPositionY()/YIDONGSUDU),Vec2(this->getPositionX(),0));
 		auto cf = CallFunc::create(std::bind(&Basebullet::remove,this));
 		this->runAction(Sequence::create(to,cf,NULL));
-	}else if(STATE==2){
+	}else if(STATE==3){
 		auto to = MoveTo::create((this->getPositionX()/YIDONGSUDU),Vec2(0,this->getPositionY()));
 		auto cf = CallFunc::create(std::bind(&Basebullet::remove,this));
 		this->runAction(Sequence::create(to,cf,NULL));
-	}else if(STATE==3){
+	}else if(STATE==1){
 		auto to = MoveTo::create(((vsize.width-this->getPositionX())/YIDONGSUDU),Vec2(vsize.width,this->getPositionY()));
 		auto cf = CallFunc::create(std::bind(&Basebullet::remove,this));
 		this->runAction(Sequence::create(to,cf,NULL));

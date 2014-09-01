@@ -34,17 +34,17 @@ bool LogicLayer::init()
 	return true;
 }
 void LogicLayer::TankTestBound()
-{
+{  
 	auto scene =dynamic_cast<GameScene *> (Director::getInstance()->getRunningScene());
-	auto tank = scene->getTanklayer()->getChildByName("tank");
+	auto tank = (BaseTank*)scene->getTanklayer()->getChildByName("tank");
+	tank->setisStop(false);
 	Vector<BaseTank *> vc = EnemyManager::getInstance()->getEnemyManger();
 	for (auto iter = vc.begin();iter!=vc.end();iter++)
 	{
 		auto enemy = *iter;
-		if (tank->getBoundingBox().intersectsRect(enemy->getBoundingBox()))
+		if (tank->getNextFrameBoundingBox().intersectsRect(enemy->getBoundingBox()))
 		{
-			//tank->setPosition(tank->getPosition());
-
+			tank->setisStop(true);
 		}
 	}
 
@@ -67,7 +67,8 @@ void LogicLayer::bulletEvsT()
 			if (enemybullet->getBoundingBox().intersectsRect(tankbullet->getBoundingBox()))
 			{
 				//设置所有子弹消失状态
-
+				tankbullet->remove();
+				enemybullet->remove();
 			}
 		}
 	}
@@ -144,7 +145,7 @@ void LogicLayer::bulletVsTank()
 	}
 }
 void LogicLayer::update(float t)
-{
+{   //清理失效物件
 	TankTestBound();
 	BulletTestBound();
 	BulletManager::getInstance()->removeAllBullets();

@@ -20,7 +20,7 @@ bool MapLayer::init(){
 	bossLayer = map->getLayer("boss");
 	bossLayer->setVisible(false);
 	//偏差
-	offX = this->getContentSize().width*0.2 - 48;
+	offX =Director::getInstance()->getVisibleSize().width*0.2 -56;
 		
 	this->addChild(map,-1);
 
@@ -142,24 +142,7 @@ bool MapLayer::breakNode(Vec2 position){
 		sptoBreak->removeFromParentAndCleanup(true);
 		
 	}
-	Vec2 towerCoord1 = converTotileCoord(position+Vec2(16,0));//地图坐标
-	auto sptoBreak1 = bgLayer->tileAt(towerCoord1);
-	if (sptoBreak1){
-		sptoBreak1->removeFromParentAndCleanup(true);
-
-	}
-	Vec2 towerCoord2 = converTotileCoord(position+Vec2(0,16));//地图坐标
-	auto sptoBreak2 = bgLayer->tileAt(towerCoord2);
-	if (sptoBreak2){
-		sptoBreak2->removeFromParentAndCleanup(true);
-
-	}
-// 	Vec2 towerCoord3 = converTotileCoord(position+Vec2(-8,0));//地图坐标
-// 	auto sptoBreak3 = bgLayer->tileAt(towerCoord3);
-// 	if (sptoBreak3){
-// 		sptoBreak3->removeFromParentAndCleanup(true);
-// 
-// 	}
+	
 	return true;
 
 }

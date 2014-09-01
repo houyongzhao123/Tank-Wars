@@ -4,6 +4,7 @@ bool BaseTank::initWithSpriteFrameName(std::string name,int hp,int speed){
 	if(!Sprite::initWithSpriteFrameName(name)){
 		return false;
 	}
+	this->setisStop(false);
 	this->runAnimate();
 	this->hp=hp;
 	this->speed=speed;
@@ -12,17 +13,20 @@ bool BaseTank::initWithSpriteFrameName(std::string name,int hp,int speed){
 	return true;
 }
 void BaseTank::move(moverect State){
+	this->state = State;
+	this->setRotation(state*90);
+	if (isstop)
+	{
+		return;
+	}
 	if(State==Up){
-		this->setRotation(0);
+		
 		this->setPositionY(this->getPositionY()+speed);
 	}else if(State==Down){
-		this->setRotation(180);
 		this->setPositionY(this->getPositionY()-speed);
 	}else if(State==Left){
-		this->setRotation(270);
 		this->setPositionX(this->getPositionX()-speed);
 	}else if(State==Right){
-		this->setRotation(90);
 		this->setPositionX(this->getPositionX()+speed);
 	}
 }
@@ -34,4 +38,27 @@ void BaseTank::hurt(int hp){
 		log("%d",this->hp);
 	}
 	
+}
+Vec2& BaseTank::getNextFramePostion()
+{   
+	auto point = this->getPosition();
+	if(state==Up){
+		point.y =this->getPositionY()+speed;
+	}else if(state==Down){
+		point.y = this->getPositionY()-speed;
+	}else if(state==Left){
+		point.x = this->getPositionX()-speed;
+	}else if(state==Right){
+		point.x = this->getPositionX()+speed;
+	}
+	return point;
+}
+Rect& BaseTank::getNextFrameBoundingBox()
+{   
+	auto point = getNextFramePostion();
+	auto height = this->getContentSize().height;
+	auto width = this->getContentSize().width;
+	float x = point.x - width/2;
+	float y = point.y - height/2;
+	return Rect(x,y,width,height);
 }
