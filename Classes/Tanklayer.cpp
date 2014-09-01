@@ -18,20 +18,20 @@ bool Tanklayer::init(){
 //²¶×½¼àÌý
 void Tanklayer::onKeyReleased(EventKeyboard::KeyCode keycode, cocos2d::Event *event)
 {   
-	if (tank == nullptr)
+	if (this->getChildByName("tank") == nullptr)
 	{
 		return;
 	}
 	
 	if (keycode == EventKeyboard::KeyCode::KEY_W)  //ÉÏ
 	{
-		ispress = true;
+
 		tank->setState(Up);
 		tank->setisStop(false);
 	}
 	if (keycode == EventKeyboard::KeyCode::KEY_A)  //×ó
 	{
-		ispress = true;
+
 		tank->setState(Left);
 		tank->setisStop(false);
 	}

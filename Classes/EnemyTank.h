@@ -11,7 +11,7 @@ protected:
 public:
 //	virtual void move(moverect State);//敌坦克的移动方法
 	virtual bool initWithSpriteFrameName(std::string name,int hp,int speed,Vec2 position);
-	virtual void fire();//敌坦克的开火方法
+	virtual void addBulletToManager(Basebullet *);//实现基类添加到管理器的方法
 	virtual  void runAnimate();
 	CREATE_FUNC(EnemyTank);
 	

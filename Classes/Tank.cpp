@@ -19,8 +19,8 @@ bool Tank::init(){
 
 	return true;
 }
-void Tank::fire(){
-	auto bullet = Basebullet::Createbullet(this->getPosition(),this->getState());
+void Tank::addBulletToManager(Basebullet * bullet)
+{
 	BulletManager::getInstance()->addTankBullet(bullet);
 }
 void Tank::runAnimate()
@@ -34,3 +34,4 @@ void Tank::runAnimate()
 	animt->setLoops(-1);
 	this->runAction(Animate::create(animt));
 }
+//2014-9-1 17:13:57ÒÆ³ıfire,Ôö¼ÓaddaddBulletToManager

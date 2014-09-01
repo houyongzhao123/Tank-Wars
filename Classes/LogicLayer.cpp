@@ -48,6 +48,7 @@ void LogicLayer::TankTestBound()
 		if (tank->getNextFrameBoundingBox().intersectsRect(enemy->getBoundingBox()))
 		{
 			tank->setisStop(true);
+			enemy->setisStop(true);
 		}
 	}
 

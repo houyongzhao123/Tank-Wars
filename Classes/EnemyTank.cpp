@@ -19,10 +19,9 @@ bool EnemyTank::initWithSpriteFrameName(std::string name,int hp,int speed,Vec2 p
 	this->schedule(schedule_selector(EnemyTank::update),5);
 	return true;
 }
-void EnemyTank::fire(){
-	auto enemybullet = Basebullet::Createbullet(this->getPosition(),this->getState());
+void EnemyTank::addBulletToManager(Basebullet * bullet){
 	//把敌方子弹加到敌方子弹容器中
-	BulletManager::getInstance()->addEnemyBullet(enemybullet);
+	BulletManager::getInstance()->addEnemyBullet(bullet);
 }
 void EnemyTank::runAnimate(){
 
@@ -30,3 +29,4 @@ void EnemyTank::runAnimate(){
 void EnemyTank::update(float t){
 	this->fire();
 }
+//2014-9-1 17:13:57移除fire,增加addaddBulletToManager

@@ -63,3 +63,14 @@ Rect& BaseTank::getNextFrameBoundingBox()
 	float y = point.y - height/2;
 	return Rect(x,y,width,height);
 }
+void BaseTank::fire()
+{   auto bu = (Basebullet *)this->getUserObject();
+	if (bu == nullptr||bu->getISDIE())
+	{
+		auto bullet = Basebullet::Createbullet(this->getPosition(),this->getState());
+	this->setUserObject(bullet);
+	addBulletToManager(bullet);
+	}
+	
+}
+//2014-9-1 16:45:01 修改::将发射子弹方法移到基类,增加管理器添加虚方法 子类实现
