@@ -1,6 +1,6 @@
 #include "AppDelegate.h"
 #include "GameScene.h"
-
+//hello world
 USING_NS_CC;
 
 AppDelegate::AppDelegate() {
