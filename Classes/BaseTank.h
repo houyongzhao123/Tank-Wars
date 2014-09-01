@@ -18,7 +18,7 @@ public:
 	CC_SYNTHESIZE(bool,isstop,isStop)
 	CC_SYNTHESIZE(bool,isdie,ISdie);//是否死亡
 	virtual void hurt(int hp);//受伤当前hp-子弹攻击力
-	virtual void move(moverect State);//根据枚举状态选择移动方向
+	virtual void move(float t);//根据枚举状态选择移动方向
 	virtual bool initWithSpriteFrameName(std::string name,int hp,int speed);
 	CC_SYNTHESIZE(moverect,state,State);//获取其枚举状态的方法
 	virtual void fire()=0;//开火方法

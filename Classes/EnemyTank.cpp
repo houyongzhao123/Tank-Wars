@@ -15,6 +15,8 @@ bool EnemyTank::initWithSpriteFrameName(std::string name,int hp,int speed,Vec2 p
 	elayer->addChild(this);
 	//把敌方坦克加入到坦克容器中
 	EnemyManager::getInstance()->addEnemy(this);
+	//定时开火移动
+	this->schedule(schedule_selector(EnemyTank::update),5);
 	return true;
 }
 void EnemyTank::fire(){
@@ -24,4 +26,7 @@ void EnemyTank::fire(){
 }
 void EnemyTank::runAnimate(){
 
+}
+void EnemyTank::update(float t){
+	this->fire();
 }

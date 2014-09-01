@@ -1,6 +1,7 @@
 #include "EnemyLayer.h"
 #include "OneTank.h"
 #include "TwoTank.h"
+#include "ThreeTank.h"
 #include "MapLayer.h"
 #include "GameScene.h"
 bool EnemyLayer::init(){
@@ -13,8 +14,9 @@ bool EnemyLayer::init(){
 void EnemyLayer::Outtank(){
 	GameScene * scene =dynamic_cast<GameScene *>(Director::getInstance()->getRunningScene());
 	MapLayer* maps = dynamic_cast<MapLayer*>(scene->getMaplayer());
-	OneTank::create(maps->getState(0));
-	TwoTank::create(maps->getState(1));
+	TwoTank::create(Vec2(400,220));
+
+	ThreeTank::create(maps->getState(2));
 }
 void EnemyLayer:: onEnter(){
 	Layer::onEnter();

@@ -26,18 +26,21 @@ bool LogicLayer::init()
 	scorelable->setPosition(Vec2(850,500));
 	this->addChild(scorelable);
 
-
-	auto leister = EventListenerTouchOneByOne::create();
-	leister->onTouchBegan = [=](Touch *t,Event *e){sprite->setPosition(t->getLocation());return true;};
-	Director::getInstance()->getEventDispatcher()->addEventListenerWithSceneGraphPriority(leister,this);
 	this->scheduleUpdate();
+
+	auto center = __NotificationCenter::getInstance();
+	center->addObserver(this,callfuncO_selector(LogicLayer::reciveEnemyDie),"EnemyDie",nullptr);//注册敌军死亡通知 
 	return true;
 }
 void LogicLayer::TankTestBound()
 {  
 	auto scene =dynamic_cast<GameScene *> (Director::getInstance()->getRunningScene());
 	auto tank = (BaseTank*)scene->getTanklayer()->getChildByName("tank");
-	tank->setisStop(false);
+	if (tank == nullptr)
+	{
+		return;
+	}//判定Tank是否为空
+
 	Vector<BaseTank *> vc = EnemyManager::getInstance()->getEnemyManger();
 	for (auto iter = vc.begin();iter!=vc.end();iter++)
 	{
@@ -94,7 +97,7 @@ void LogicLayer::bulletvsBarrer()
 			bu->remove();
 		}
 	}
-	for (auto titer = enemybu.begin();titer!=enemybu.end();titer)
+	for (auto titer = enemybu.begin();titer!=enemybu.end();titer++)
 	{    auto bu = (*titer);
 	if (map->checkIsNode(bu->getPosition()))
 	{
@@ -131,18 +134,23 @@ void LogicLayer::bulletVsTank()
 	auto enemybu = BulletManager::getInstance()->getEnemyBulletManger();
 	auto scene =dynamic_cast<GameScene *> (Director::getInstance()->getRunningScene());
 	auto tank =(BaseTank *) scene->getTanklayer()->getChildByName("tank");
+	
 	if (tank==nullptr)
 	{
 		return;
 	}
+	tank->retain();
 	for (auto eiter = enemybu.begin();eiter!=enemybu.end();eiter++)
 	{   auto bullet = *eiter;
 		if (tank->getBoundingBox().intersectsRect(bullet->getBoundingBox()))
 		{
 			//tank掉血 gameover
 			tank->hurt(bullet->getATTACK());
+			bullet->remove();
+
 		}
 	}
+	tank->release();
 }
 void LogicLayer::update(float t)
 {   //清理失效物件
@@ -150,4 +158,15 @@ void LogicLayer::update(float t)
 	BulletTestBound();
 	BulletManager::getInstance()->removeAllBullets();
 	EnemyManager::getInstance()->removeAllenemys();
+}
+void LogicLayer::reciveEnemyDie(Ref * obj)
+{
+	enemycount--;
+	enemystr = StringUtils::format("x %d",enemycount);
+	enemylable->setString(enemystr);
+	score = score+10;
+	scorestr = StringUtils::format("score:%d",score);
+	scorelable->setString(scorestr);
+	this->addChild(scorelable);
+	//分数改变
 }

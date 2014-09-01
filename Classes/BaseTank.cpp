@@ -4,30 +4,30 @@ bool BaseTank::initWithSpriteFrameName(std::string name,int hp,int speed){
 	if(!Sprite::initWithSpriteFrameName(name)){
 		return false;
 	}
-	this->setisStop(false);
+	this->setisStop(true);
 	this->runAnimate();
 	this->hp=hp;
 	this->speed=speed;
 	this->state=Up;
 	this->isdie=false;
+	this->schedule(schedule_selector(BaseTank::move));
 	return true;
 }
-void BaseTank::move(moverect State){
-	this->state = State;
+void BaseTank::move(float t){
 	this->setRotation(state*90);
 	if (isstop)
 	{
 		return;
 	}
-	if(State==Up){
+	if(state==Up){
 		
-		this->setPositionY(this->getPositionY()+speed);
-	}else if(State==Down){
-		this->setPositionY(this->getPositionY()-speed);
-	}else if(State==Left){
-		this->setPositionX(this->getPositionX()-speed);
-	}else if(State==Right){
-		this->setPositionX(this->getPositionX()+speed);
+		this->setPositionY(this->getPositionY()+speed * t);
+	}else if(state==Down){
+		this->setPositionY(this->getPositionY()-speed * t);
+	}else if(state==Left){
+		this->setPositionX(this->getPositionX()-speed * t);
+	}else if(state==Right){
+		this->setPositionX(this->getPositionX()+speed * t);
 	}
 }
 void BaseTank::hurt(int hp){
@@ -41,15 +41,16 @@ void BaseTank::hurt(int hp){
 }
 Vec2& BaseTank::getNextFramePostion()
 {   
+	float fps = Director::getInstance()->getAnimationInterval();
 	auto point = this->getPosition();
 	if(state==Up){
-		point.y =this->getPositionY()+speed;
+		point.y =this->getPositionY()+speed*fps;
 	}else if(state==Down){
-		point.y = this->getPositionY()-speed;
+		point.y = this->getPositionY()-speed*fps;
 	}else if(state==Left){
-		point.x = this->getPositionX()-speed;
+		point.x = this->getPositionX()-speed*fps;
 	}else if(state==Right){
-		point.x = this->getPositionX()+speed;
+		point.x = this->getPositionX()+speed*fps;
 	}
 	return point;
 }

@@ -11,35 +11,40 @@ bool Tanklayer::init(){
 	//×¢²á²¶×½¼àÌı	
 	auto listenerkeyPad = EventListenerKeyboard::create();
 	listenerkeyPad->onKeyPressed = CC_CALLBACK_2(Tanklayer::onKeyReleased, this);
-	listenerkeyPad->onKeyReleased = [=](EventKeyboard::KeyCode keycode, cocos2d::Event *event){ispress =false;};
+	listenerkeyPad->onKeyReleased = [=](EventKeyboard::KeyCode keycode, cocos2d::Event *event){tank->setisStop(true);};
 	_eventDispatcher->addEventListenerWithSceneGraphPriority(listenerkeyPad, this);
-	this->schedule(schedule_selector(Tanklayer::update),0.05);
 	return true;
 }
 //²¶×½¼àÌı
 void Tanklayer::onKeyReleased(EventKeyboard::KeyCode keycode, cocos2d::Event *event)
 {   
-
+	if (tank == nullptr)
+	{
+		return;
+	}
+	
 	if (keycode == EventKeyboard::KeyCode::KEY_W)  //ÉÏ
 	{
 		ispress = true;
 		tank->setState(Up);
-
+		tank->setisStop(false);
 	}
 	if (keycode == EventKeyboard::KeyCode::KEY_A)  //×ó
 	{
 		ispress = true;
 		tank->setState(Left);
+		tank->setisStop(false);
 	}
 	if (keycode == EventKeyboard::KeyCode::KEY_D)  //ÓÒ
 	{
-		ispress = true;
 		tank->setState(Right);
+		tank->setisStop(false);
+
 	}
 	if (keycode == EventKeyboard::KeyCode::KEY_S) //ÏÂ
 	{
-		ispress = true;
 		tank->setState(Down);
+		tank->setisStop(false);
 	}
 	if (keycode == EventKeyboard::KeyCode::KEY_J)//·¢»ğ
 
@@ -47,11 +52,4 @@ void Tanklayer::onKeyReleased(EventKeyboard::KeyCode keycode, cocos2d::Event *ev
 		tank->fire();
 	}
 
-}
-void Tanklayer::update(float t){   
-
-	if (ispress)
-	{   
-		tank->move(tank->getState());
-	}
 }

@@ -10,7 +10,6 @@ public:
 	void onKeyReleased(EventKeyboard::KeyCode keycode, cocos2d::Event *event);//°´¼ü¼àÌý
 	virtual bool init();
 	CREATE_FUNC(Tanklayer);
-	void update(float t);
 private:
 	Tank* tank;
 };

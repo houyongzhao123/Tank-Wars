@@ -19,6 +19,7 @@ public:
 	void bulletvsBarrer();//子弹和墙
 	void bulletVsEnemy();//己方子弹和敌军
 	void bulletVsTank();//敌方子弹和主角
+	void reciveEnemyDie(Ref * obj);
 	void update(float);
 };
 #endif // !__LOGICLAYER_H

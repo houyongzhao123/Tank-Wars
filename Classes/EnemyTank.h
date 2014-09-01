@@ -6,10 +6,14 @@ using namespace cocos2d;
 class EnemyTank:public BaseTank{
 protected:
 	Vec2 position;
+	//敌坦克的智能移动和开火
+	virtual void update(float t);
 public:
+//	virtual void move(moverect State);//敌坦克的移动方法
 	virtual bool initWithSpriteFrameName(std::string name,int hp,int speed,Vec2 position);
-	virtual void fire();
+	virtual void fire();//敌坦克的开火方法
 	virtual  void runAnimate();
 	CREATE_FUNC(EnemyTank);
+	
 };
 #endif
