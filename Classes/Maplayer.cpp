@@ -5,6 +5,7 @@ bool MapLayer::init(){
 	if (!Layer::init()){
 		return false;
 	}
+	count =4;
 	auto bg = Sprite::create("background.jpg");
 	this->addChild(bg, -2);
 	bg->setNormalizedPosition(Vec2(0.5, 0.5));
@@ -16,12 +17,11 @@ bool MapLayer::init(){
 
 	//做好的地图中的背景层
 	bgLayer = map->getLayer("bg");
-	//bgLayer->setNormalizedPosition(Vec2(0.2,0));
-	/*log("{%f，%f}",bgLayer->getPositionX()-bgLayer->getContentSize().width/2,bgLayer->getPositionX()+bgLayer->getContentSize().width/2);*/
+	//bgLayer->setNormalizedPosition(Vec2(0.2, 0));
 	bossLayer = map->getLayer("boss");
 	bossLayer->setVisible(false);
 	//偏差
-	offX =/*Director::getInstance()->getVisibleSize().width*0.2 -56*/0;
+	offX =/*Director::getInstance()->getVisibleSize().width*0.2 -64*/0;
 		
 	this->addChild(map,-1);
 
@@ -102,7 +102,7 @@ Vec2 MapLayer::converTotileCoord(Vec2 position){
 //检查是否有东西
 bool MapLayer::checkIsNode(Vec2 position){
 
-	Vec2 towerCoord = converTotileCoord(position);//地图坐标
+	Vec2 towerCoord = converTotileCoord(Vec2(position.x,position.y));//地图坐标
 	//Vec2 matrixCoord = converToMatrixCoord(position);//数组位置
 	if (towerCoord.x>=20||towerCoord.x<0)
 	{
@@ -139,6 +139,9 @@ bool MapLayer::checkNodeBreak(Vec2 position){
 bool MapLayer::breakNode(Vec2 position){
 	Vec2 towerCoord = converTotileCoord(position + Vec2(0,0));//地图坐标
 	auto sptoBreak = bgLayer->tileAt(towerCoord);
+	if (bgLayer->getTileGIDAt(towerCoord) == 6){
+		count--;
+	}
 	if (sptoBreak){
 		sptoBreak->removeFromParentAndCleanup(true);
 		
@@ -146,4 +149,14 @@ bool MapLayer::breakNode(Vec2 position){
 	
 	return true;
 
+}
+//检查是否失败,就是基地有没有被打爆
+bool MapLayer::isDefeated(){
+	if (count==0){
+		return true;
+	}
+	return false;
+}void MapLayer::failed()//失败调用的方法
+{
+	bossLayer->setVisible(true);
 }

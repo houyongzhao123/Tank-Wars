@@ -3,12 +3,17 @@
 #include "Tanklayer.h"
 #include "EnemyLayer.h"
 #include "LogicLayer.h"
+#include "MessageLayer.h"
+#include "SimpleAudioEngine.h"
+#include "ControlLayer.h"
+using namespace CocosDenshion;
 bool GameScene::init(){
 	if(!Scene::init()){
 		return false;
 	}
 	//加入帧缓存图片
 	SpriteFrameCache::getInstance()->addSpriteFramesWithFile("image.plist");
+	SimpleAudioEngine::getInstance()->playEffect("02 start.aif");
 	//加入地图层
 	auto maplayer= MapLayer::create();
 	maplayer->setName("map");
@@ -21,9 +26,16 @@ bool GameScene::init(){
 	auto enemylayer = EnemyLayer::create();
 	enemylayer->setName("enemlayer");
 	this->addChild(enemylayer);
-	//逻辑
+	//加入逻辑层
     auto logiclayer = LogicLayer::create();
 	this->addChild(logiclayer);
+	//加入消息层
+	auto messagelayer = MessageLayer::create();
+	this->addChild(messagelayer);
+	//加入控制层
+	auto controllayer = ControlLayer::create();
+	controllayer->bindControlTarget((BaseTank *)tanklyer->getChildByName("tank"));
+	this->addChild(controllayer);
 	return true;
 }
 Layer* GameScene::getTanklayer(){

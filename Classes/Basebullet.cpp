@@ -1,6 +1,8 @@
 #include "Basebullet.h"
 #include "GameScene.h"
 #include "BulletManager.h"
+#include "SimpleAudioEngine.h"
+using namespace CocosDenshion;
 Basebullet* Basebullet::Createbullet(Vec2 position,moverect STATE){
 	Basebullet *bullet =new Basebullet();
 	if(bullet && bullet->initWithTank(position,STATE))
@@ -15,6 +17,7 @@ bool Basebullet::initWithTank(Vec2 position,moverect STATE){
 	if(!Sprite::initWithSpriteFrameName("bullet.png")){
 		return false;
 	}
+	
 	this->Attack=BULLETATTACK;
 	this->STATE = STATE;
 	this->setRotation(90*STATE);

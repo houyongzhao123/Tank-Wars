@@ -10,7 +10,7 @@ bool EnemyLayer::init(){
 		return false;
 	}
 	//每25秒出一波坦克
-	this->schedule(schedule_selector(EnemyLayer::update),5);
+	this->schedule(schedule_selector(EnemyLayer::update),2);
 	return true;
 }
 void EnemyLayer::Outtank(){
@@ -19,9 +19,9 @@ void EnemyLayer::Outtank(){
 	//当场上坦克个数多余5个就停止出坦克最多场上有8个坦克
 	int n = EnemyManager::getInstance()->getEnemyManger().size();
 	if(n<=5){
-	TwoTank::create(maps->getState(0));
-	OneTank::create(maps->getState(1));
-	ThreeTank::create(maps->getState(2));
+	auto tank1 = TwoTank::create(maps->getState(0));
+	auto tank2 = OneTank::create(maps->getState(1));
+	auto tank3 = ThreeTank::create(maps->getState(2));
 	}else{
 		return;
 	}
@@ -33,3 +33,6 @@ void EnemyLayer:: onEnter(){
 void EnemyLayer::update(float t){
 	this->onEnter();
 }
+
+	
+	

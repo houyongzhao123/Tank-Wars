@@ -1,6 +1,8 @@
 #include "Tank.h"
 #include "Basebullet.h"
 #include "BulletManager.h"
+#include "SimpleAudioEngine.h"
+using namespace CocosDenshion;
 Tank* Tank::create(){
 	Tank *mytank =new Tank();
 	if(mytank && mytank->init())
@@ -20,6 +22,7 @@ bool Tank::init(){
 	return true;
 }
 void Tank::fire(){
+	SimpleAudioEngine::getInstance()->playEffect("bullet.aif");
 	auto bullet = Basebullet::Createbullet(this->getPosition(),this->getState());
 	BulletManager::getInstance()->addTankBullet(bullet);
 }
@@ -33,4 +36,8 @@ void Tank::runAnimate()
 	animt->setDelayPerUnit(0.1f);
 	animt->setLoops(-1);
 	this->runAction(Animate::create(animt));
+}
+void Tank::playMoveEffect()
+{
+	SimpleAudioEngine::getInstance()->playEffect("move.aif");
 }

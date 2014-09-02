@@ -7,8 +7,10 @@ public:
 	void onEnter();
 	virtual bool init();
 	CREATE_FUNC(EnemyLayer);
+	//产生坦克
 	virtual void Outtank();
 private:
+	//敌坦克的产生回调
 	virtual void update(float t);
 };
 #endif

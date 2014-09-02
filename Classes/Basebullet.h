@@ -14,7 +14,7 @@ public:
 	virtual void remove();//将移出屏幕的子弹弄死
 	CC_SYNTHESIZE(bool,isdie,ISDIE);//读取子弹是否死亡
 private:
-	
+	int sid;
 	moverect STATE;//枚举状态
 	Size vsize;//屏幕尺寸
 	Vec2 position;//初始位置

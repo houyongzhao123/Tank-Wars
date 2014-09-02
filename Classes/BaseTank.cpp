@@ -14,37 +14,36 @@ bool BaseTank::initWithSpriteFrameName(std::string name,int hp,int speed){
 	this->state=Up;
 	this->isdie=false;
 	this->schedule(schedule_selector(BaseTank::move));
+	this->BlinkAnimation();
 	return true;
 }
+//移动方法
 void BaseTank::move(float t){
-// 	auto scene=dynamic_cast<GameScene*>(Director::getInstance()->getRunningScene());
-// 	auto layer=dynamic_cast<MapLayer*>(scene->getMaplayer());
-
 	this->setRotation(state*90);
 	if (isstop)
 	{
 		return;
 	}
 	if(state==Up){
-		if (boundingBox(Vec2(this->getPositionX(),this->getPositionY()+speed * t+8))||(this->getPositionY()+this->getContentSize().height/2>640))
+		if (boundingBox(Vec2(this->getPositionX(),this->getPositionY()+speed * t))||(this->getPositionY()+this->getContentSize().height/2>640))
 		{
 			return;
 		}
 		this->setPositionY(this->getPositionY()+speed * t);
 	}else if(state==Down){
-		if (boundingBox(Vec2(this->getPositionX(),this->getPositionY()-speed * t-8))||(this->getPositionY()-this->getContentSize().height/2<0))
+		if (boundingBox(Vec2(this->getPositionX(),this->getPositionY()-speed * t))||(this->getPositionY()-this->getContentSize().height/2<0))
 		{
 			return;
 		}
 		this->setPositionY(this->getPositionY()-speed * t);
 	}else if(state==Left){
-		if (boundingBox(Vec2(this->getPositionX()-speed * t -8,this->getPositionY()))||(this->getPositionX()-this->getContentSize().width/2<0))
+		if (boundingBox(Vec2(this->getPositionX()-speed * t,this->getPositionY()))||(this->getPositionX()-this->getContentSize().width/2<0))
 		{
 			return;
 		}
 		this->setPositionX(this->getPositionX()-speed * t);
 	}else if(state==Right){
-		if (boundingBox(Vec2(this->getPositionX()+speed * t +8,this->getPositionY()))||(this->getPositionX()+this->getContentSize().width/2>640))
+		if (boundingBox(Vec2(this->getPositionX()+speed * t ,this->getPositionY()))||(this->getPositionX()+this->getContentSize().width/2>640))
 		{
 			return;
 		}
@@ -56,10 +55,11 @@ bool BaseTank::boundingBox(Vec2 position)//移动后碰撞检测
 {
 	auto scene = dynamic_cast<GameScene*>(Director::getInstance()->getRunningScene());
 	auto layer = dynamic_cast<MapLayer*>(scene->getMaplayer());
-	auto point1 = Vec2(position.x - 11, position.y - 11);
-	auto point2 = Vec2(position.x - 11, position.y + 11);
-	auto point3 = Vec2(position.x + 11, position.y + 11);
-	auto point4 = Vec2(position.x + 11, position.y - 11);
+	auto point1 = Vec2(position.x - 12, position.y - 12);
+	auto point2 = Vec2(position.x - 12, position.y + 12);
+	auto point3 = Vec2(position.x + 12, position.y + 12);
+	auto point4 = Vec2(position.x + 12, position.y - 12);
+	
 	if (!layer->checkIsNode(point1) && !layer->checkIsNode(point2) && !layer->checkIsNode(point3) && !layer->checkIsNode(point4)){
 		return false;
 	}
@@ -67,20 +67,15 @@ bool BaseTank::boundingBox(Vec2 position)//移动后碰撞检测
 }
 void BaseTank::hurt(int hp){
 	auto center = __NotificationCenter::getInstance();
-	
 	this->hp-=hp;
 	center->postNotification("TankHurt",this);
 	if(this->hp<=0){
 		this->isdie=true;
-		
 		center->postNotification("EnemyDie",this);
-		
-		this->removeFromParentAndCleanup(true);
-		log("%d",this->hp);
-	}
-	
+		this->dieAnimation();
+	}	
 }
-Vec2& BaseTank::getNextFramePostion()//获取下一帧的坐标
+Vec2& BaseTank::getNextFramePostion()
 {   
 	float fps = Director::getInstance()->getAnimationInterval();
 	auto point = this->getPosition();
@@ -95,7 +90,8 @@ Vec2& BaseTank::getNextFramePostion()//获取下一帧的坐标
 	}
 	return point;
 }
-Rect& BaseTank::getNextFrameBoundingBox()//获取下一帧碰撞矩形
+//地图检测
+Rect& BaseTank::getNextFrameBoundingBox()
 {   
 	auto point = getNextFramePostion();
 	auto height = this->getContentSize().height;
@@ -103,4 +99,32 @@ Rect& BaseTank::getNextFrameBoundingBox()//获取下一帧碰撞矩形
 	float x = point.x - width/2;
 	float y = point.y - height/2;
 	return Rect(x,y,width,height);
+}
+//死亡动画
+void BaseTank::dieAnimation(){
+	this->unscheduleAllSelectors();
+	auto animt =Animation::create();
+	auto cache =SpriteFrameCache::getInstance();
+	animt->addSpriteFrame(cache->getSpriteFrameByName("explode-1.png"));
+	animt->addSpriteFrame(cache->getSpriteFrameByName("explode-2.png"));
+	animt->addSpriteFrame(cache->getSpriteFrameByName("explode-3.png"));
+	animt->setDelayPerUnit(0.1f);
+	animt->setLoops(1);	
+	auto  cf =CallFunc::create([=](){
+		this->removeFromParentAndCleanup(true);
+	});
+	this->runAction(Sequence::create(Animate::create(animt),cf,NULL));	
+}
+//闪烁动画
+void BaseTank::BlinkAnimation(){	
+	auto animt =Animation::create();
+	auto cache =SpriteFrameCache::getInstance();
+	animt->addSpriteFrame(cache->getSpriteFrameByName("xing1.png"));
+	animt->addSpriteFrame(cache->getSpriteFrameByName("xing2.png"));
+	animt->addSpriteFrame(cache->getSpriteFrameByName("xing3.png"));
+	animt->addSpriteFrame(cache->getSpriteFrameByName("xing4.png"));
+	animt->setDelayPerUnit(0.3f);
+	animt->setLoops(1);	
+	animt->setRestoreOriginalFrame(true);
+	this->runAction(Animate::create(animt));
 }

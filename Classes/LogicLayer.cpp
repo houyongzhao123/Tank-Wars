@@ -3,41 +3,41 @@
 #include "GameScene.h"
 #include "EnemyManager.h"
 #include "BulletManager.h"
+#include "GameOverLayer.h"
 bool LogicLayer::init()
 {
 	if (!Layer::init())
 	{
 		return false;
 	}
-    auto sprite = Sprite::createWithSpriteFrameName("en1.png");
-	sprite->setPosition(Vec2(800,400));
-	sprite->setTag(1);
-	this->addChild(sprite);
-	auto sp1 = Sprite::createWithSpriteFrameName("flag.png");
-    sp1->setPosition(Vec2(800,200));
-	this->addChild(sp1);
-	//
-    enemycount=20;
-	enemystr = StringUtils::format("x %d",enemycount);
-	enemylable = Label::createWithSystemFont(enemystr,"Airal",20);
-	score=0;
-	enemylable->setPosition(850,400);
-	this->addChild(enemylable);
-	scorestr = StringUtils::format("score:%d",score);
-	scorelable = Label::createWithSystemFont(scorestr,"Arial",20);
-	scorelable->setPosition(Vec2(850,500));
-	this->addChild(scorelable);
-	
-
+   
 	//坦克HP
 	this->scheduleUpdate();
-
-	auto center = __NotificationCenter::getInstance();
-	center->addObserver(this,callfuncO_selector(LogicLayer::reciveEnemyDie),"EnemyDie",nullptr);//注册敌军死亡通知 
+	//暂停按键
+	 Label *l =Label::createWithBMFont("fonts/futura-48.fnt","Pause/Resume");
+	 l->setPosition(Vec2(850,610));
+	 l->setScale(0.2f);
+	auto sp1 =Sprite::create("stop1.png");
+	auto sp2 =Sprite::create("stop2.png");
+	auto item =MenuItemSprite::create(sp1,sp2,[=](Ref *){
+		if(Director::getInstance()->isPaused())
+		{
+        Director::getInstance()->resume();
+        }
+		else
+		{
+			Director::getInstance()->pause();
+		}
+	});
+	auto menu =Menu::create(item,NULL);
+	menu->setPosition(Vec2(610,400));
+	menu->setScale(0.5f);
+	this->addChild(menu);
+	this->addChild(l);
 	return true;
 }
 void LogicLayer::TankTestBound()
-{  
+{  //坦克间碰撞
 	auto scene =dynamic_cast<GameScene *> (Director::getInstance()->getRunningScene());
 	auto tank = (BaseTank*)scene->getTanklayer()->getChildByName("tank");
 	if (tank == nullptr)
@@ -128,7 +128,7 @@ void LogicLayer::bulletVsEnemy()
 	   for (auto eiter = enemy.begin();eiter!=enemy.end();eiter++)
 	   {   
 		   auto enemy = *eiter;
-		   if (enemy->getBoundingBox().intersectsRect(tankbullet->getBoundingBox()))
+		   if (enemy->getBoundingBox().intersectsRect(tankbullet->getBoundingBox())&&!enemy->getISdie())
 		   {
 			   //设置消失状态
 			   tankbullet->remove();
@@ -164,41 +164,19 @@ void LogicLayer::update(float t)
 {   //清理失效物件
 	TankTestBound();
 	BulletTestBound();
+	checkisDefeated();
 	BulletManager::getInstance()->removeAllBullets();
 	EnemyManager::getInstance()->removeAllenemys();
 }
-void LogicLayer::reciveEnemyDie(Ref * obj)
-{
-	enemycount--;
-	enemystr = StringUtils::format("x %d",enemycount);
-	enemylable->setString(enemystr);
-	score = score+10;
-	scorestr = StringUtils::format("score:%d",score);
-	scorelable->setString(scorestr);
-	//分数改变
-}
-void LogicLayer::onEnter()
-{
-	Layer::onEnter();
-	auto scene =dynamic_cast<GameScene *> (Director::getInstance()->getRunningScene());
+void LogicLayer::checkisDefeated()
+{  
+	auto scene = dynamic_cast<GameScene *>(Director::getInstance()->getRunningScene());
+	auto map = dynamic_cast<MapLayer *>(scene->getChildByName("map"));
 	auto tank = (BaseTank*)scene->getTanklayer()->getChildByName("tank");
-	if (tank == nullptr)
+	if (map->isDefeated()||tank==nullptr)
 	{
-		return;
-	}//判定Tank是否为空
-	auto center = __NotificationCenter::getInstance();
-	center->addObserver(this,callfuncO_selector(LogicLayer::reciveTankHurt),"TankHurt",tank);
-	tankHP = tank->getHp();
-	tankHPstr = StringUtils::format("x %d",tankHP);
-	tankHPlable = Label::createWithSystemFont(tankHPstr,"Arial",20);
-	tankHPlable->setPosition(850,200);
-	this->addChild(tankHPlable);
-
+		map->failed();
+		this->addChild(GameOverLayer::create());
+		this->unscheduleAllSelectors();		
+	}
 }
-void LogicLayer::reciveTankHurt(Ref *obg)
-{
-	tankHP = ((BaseTank *)(obg))->getHp();
-	tankHPstr = StringUtils::format("x %d",tankHP);
-	tankHPlable->setString(tankHPstr);
-}
-//消息监听

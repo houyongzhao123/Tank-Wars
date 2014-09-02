@@ -1,12 +1,12 @@
 #include "StartScene.h"
 #include "GameScene.h"
-
+#include "AudioRes.h"
 bool StartScene::init(){
 	if (!Scene::init()){
 		return false;
 	}
-
 	//添加坦克世界的图片
+	AudioInit();
 	auto title = Sprite::create("BattleCity.png");
 	title->setNormalizedPosition(Vec2(0.5, 0.6));
 	this->addChild(title);

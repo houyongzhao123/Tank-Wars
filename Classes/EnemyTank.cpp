@@ -58,3 +58,7 @@ void EnemyTank::Enemymove(float t){
 		this->setState(i);
 	}	
 }
+void EnemyTank::playMoveEffect()
+{
+
+}

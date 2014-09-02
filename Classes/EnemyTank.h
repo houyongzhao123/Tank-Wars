@@ -10,6 +10,7 @@ protected:
 	virtual void Enemymove(float t);
 	//敌坦克的智能移动和开火
 	virtual void update(float t);
+	virtual void playMoveEffect();
 public:
 //	virtual void move(moverect State);//敌坦克的移动方法
 	virtual bool initWithSpriteFrameName(std::string name,int hp,int speed,Vec2 position);
