@@ -7,9 +7,9 @@
 using namespace cocos2d;
 class Tank:public BaseTank{
 public:
+	virtual void fire();
 	virtual  void runAnimate();
 	virtual bool init();
-	virtual void addBulletToManager(Basebullet *);
 	static Tank* create();
 };
 #endif

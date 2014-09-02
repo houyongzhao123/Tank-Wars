@@ -8,5 +8,7 @@ public:
 	virtual bool init();
 	CREATE_FUNC(EnemyLayer);
 	virtual void Outtank();
+private:
+	virtual void update(float t);
 };
 #endif

@@ -2,8 +2,8 @@
 #define __ONETANK_H
 #include "cocos2d.h"
 #include "EnemyTank.h"
-#define ONEHP 400
-#define ONESPEED 4
+#define ONEHP 100
+#define ONESPEED 50
 using namespace cocos2d;
 class OneTank:public EnemyTank{
 public:

@@ -3,7 +3,7 @@
 #include "cocos2d.h"
 #include "EnemyTank.h"
 #define TWOHP 200
-#define TWOSPEED 2
+#define TWOSPEED 75
 using namespace cocos2d;
 class TwoTank:public EnemyTank{
 public:

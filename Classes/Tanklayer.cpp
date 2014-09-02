@@ -6,15 +6,21 @@ bool Tanklayer::init(){
 	ispress =false;
 	tank = Tank::create();
 	tank->setName("tank");
-	tank->setPosition(Vec2(480,320));
+	tank->setPosition(240,16);
 	this->addChild(tank);
 	//×¢²á²¶×½¼àÌý	
 	auto listenerkeyPad = EventListenerKeyboard::create();
 	listenerkeyPad->onKeyPressed = CC_CALLBACK_2(Tanklayer::onKeyReleased, this);
-	listenerkeyPad->onKeyReleased = [=](EventKeyboard::KeyCode keycode, cocos2d::Event *event){tank->setisStop(true);};
+	listenerkeyPad->onKeyReleased = [=](EventKeyboard::KeyCode keycode, cocos2d::Event *event){
+		if (this->getChildByName("tank")!=nullptr)
+		{
+			tank->setisStop(true);
+		}
+		};
 	_eventDispatcher->addEventListenerWithSceneGraphPriority(listenerkeyPad, this);
 	return true;
 }
+
 //²¶×½¼àÌý
 void Tanklayer::onKeyReleased(EventKeyboard::KeyCode keycode, cocos2d::Event *event)
 {   
@@ -25,13 +31,13 @@ void Tanklayer::onKeyReleased(EventKeyboard::KeyCode keycode, cocos2d::Event *ev
 	
 	if (keycode == EventKeyboard::KeyCode::KEY_W)  //ÉÏ
 	{
-
+		
 		tank->setState(Up);
 		tank->setisStop(false);
 	}
 	if (keycode == EventKeyboard::KeyCode::KEY_A)  //×ó
 	{
-
+	
 		tank->setState(Left);
 		tank->setisStop(false);
 	}

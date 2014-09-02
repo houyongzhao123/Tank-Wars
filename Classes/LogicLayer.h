@@ -9,7 +9,11 @@ class LogicLayer:public Layer
 	int enemycount;
 	Label *enemylable;
 	std::string enemystr;
+	Label *tankHPlable;
+	std::string tankHPstr;
+	int tankHP;
 public:
+	void onEnter();
 	CC_SYNTHESIZE(int,score,Score);
 	virtual bool init();
 	CREATE_FUNC(LogicLayer);
@@ -20,6 +24,7 @@ public:
 	void bulletVsEnemy();//己方子弹和敌军
 	void bulletVsTank();//敌方子弹和主角
 	void reciveEnemyDie(Ref * obj);
+	void reciveTankHurt(Ref *obg);
 	void update(float);
 };
 #endif // !__LOGICLAYER_H

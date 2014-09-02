@@ -11,16 +11,17 @@ bool MapLayer::init(){
 	
 
 	//地图的载入
-	map = TMXTiledMap::create("map.tmx");
+	map = TMXTiledMap::create("map1.tmx");
 
 
 	//做好的地图中的背景层
 	bgLayer = map->getLayer("bg");
-	bgLayer->setNormalizedPosition(Vec2(0.2,0));
+	//bgLayer->setNormalizedPosition(Vec2(0.2,0));
+	/*log("{%f，%f}",bgLayer->getPositionX()-bgLayer->getContentSize().width/2,bgLayer->getPositionX()+bgLayer->getContentSize().width/2);*/
 	bossLayer = map->getLayer("boss");
 	bossLayer->setVisible(false);
 	//偏差
-	offX =Director::getInstance()->getVisibleSize().width*0.2 -56;
+	offX =/*Director::getInstance()->getVisibleSize().width*0.2 -56*/0;
 		
 	this->addChild(map,-1);
 
@@ -103,11 +104,11 @@ bool MapLayer::checkIsNode(Vec2 position){
 
 	Vec2 towerCoord = converTotileCoord(position);//地图坐标
 	//Vec2 matrixCoord = converToMatrixCoord(position);//数组位置
-	if (towerCoord.x>=40||towerCoord.x<=0)
+	if (towerCoord.x>=20||towerCoord.x<0)
 	{
 		return false;
 	}
-	if (towerCoord.y>=40||towerCoord.y<=0)
+	if (towerCoord.y>=20||towerCoord.y<0)
 	{
 		return false;
 	}

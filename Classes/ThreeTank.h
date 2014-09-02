@@ -2,8 +2,8 @@
 #define __THREETANK_H
 #include "cocos2d.h"
 #include "EnemyTank.h"
-#define THREEHP 600
-#define THREESPEED 5
+#define THREEHP 300
+#define THREESPEED 100
 using namespace cocos2d;
 class ThreeTank: public EnemyTank{
 public:

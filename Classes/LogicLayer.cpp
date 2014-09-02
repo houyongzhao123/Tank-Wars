@@ -13,7 +13,9 @@ bool LogicLayer::init()
 	sprite->setPosition(Vec2(800,400));
 	sprite->setTag(1);
 	this->addChild(sprite);
-
+	auto sp1 = Sprite::createWithSpriteFrameName("flag.png");
+    sp1->setPosition(Vec2(800,200));
+	this->addChild(sp1);
 	//
     enemycount=20;
 	enemystr = StringUtils::format("x %d",enemycount);
@@ -25,7 +27,9 @@ bool LogicLayer::init()
 	scorelable = Label::createWithSystemFont(scorestr,"Arial",20);
 	scorelable->setPosition(Vec2(850,500));
 	this->addChild(scorelable);
+	
 
+	//坦克HP
 	this->scheduleUpdate();
 
 	auto center = __NotificationCenter::getInstance();
@@ -48,6 +52,9 @@ void LogicLayer::TankTestBound()
 		if (tank->getNextFrameBoundingBox().intersectsRect(enemy->getBoundingBox()))
 		{
 			tank->setisStop(true);
+		}
+		if (enemy->getNextFrameBoundingBox().intersectsRect(tank->getBoundingBox()))
+		{
 			enemy->setisStop(true);
 		}
 	}
@@ -148,7 +155,7 @@ void LogicLayer::bulletVsTank()
 			//tank掉血 gameover
 			tank->hurt(bullet->getATTACK());
 			bullet->remove();
-
+			
 		}
 	}
 	tank->release();
@@ -168,6 +175,30 @@ void LogicLayer::reciveEnemyDie(Ref * obj)
 	score = score+10;
 	scorestr = StringUtils::format("score:%d",score);
 	scorelable->setString(scorestr);
-	this->addChild(scorelable);
 	//分数改变
 }
+void LogicLayer::onEnter()
+{
+	Layer::onEnter();
+	auto scene =dynamic_cast<GameScene *> (Director::getInstance()->getRunningScene());
+	auto tank = (BaseTank*)scene->getTanklayer()->getChildByName("tank");
+	if (tank == nullptr)
+	{
+		return;
+	}//判定Tank是否为空
+	auto center = __NotificationCenter::getInstance();
+	center->addObserver(this,callfuncO_selector(LogicLayer::reciveTankHurt),"TankHurt",tank);
+	tankHP = tank->getHp();
+	tankHPstr = StringUtils::format("x %d",tankHP);
+	tankHPlable = Label::createWithSystemFont(tankHPstr,"Arial",20);
+	tankHPlable->setPosition(850,200);
+	this->addChild(tankHPlable);
+
+}
+void LogicLayer::reciveTankHurt(Ref *obg)
+{
+	tankHP = ((BaseTank *)(obg))->getHp();
+	tankHPstr = StringUtils::format("x %d",tankHP);
+	tankHPlable->setString(tankHPstr);
+}
+//消息监听

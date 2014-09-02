@@ -17,6 +17,7 @@ bool Basebullet::initWithTank(Vec2 position,moverect STATE){
 	}
 	this->Attack=BULLETATTACK;
 	this->STATE = STATE;
+	this->setRotation(90*STATE);
 	this->position=position;
 	this->setPosition(position);
 	vsize = Director::getInstance()->getVisibleSize();
@@ -43,7 +44,7 @@ void Basebullet::move(){
 		auto cf = CallFunc::create(std::bind(&Basebullet::remove,this));
 		this->runAction(Sequence::create(to,cf,NULL));
 	}else if(STATE==1){
-		auto to = MoveTo::create(((vsize.width-this->getPositionX())/YIDONGSUDU),Vec2(vsize.width,this->getPositionY()));
+		auto to = MoveTo::create(((640-this->getPositionX())/YIDONGSUDU),Vec2(640,this->getPositionY()));
 		auto cf = CallFunc::create(std::bind(&Basebullet::remove,this));
 		this->runAction(Sequence::create(to,cf,NULL));
 	}
